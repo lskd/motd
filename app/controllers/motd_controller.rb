@@ -45,7 +45,7 @@ class MotdController < ApplicationController
       space_url = "https://api.data.gov/nasa/planetary/apod?date=#{@date_now}&api_key=DEMO_KEY"
       @spacepix = HTTParty.get(space_url) # ingress data into @spacepix instance
     # old API key no longer works : nasa's side?, I reckon true
-    # old api :  y5O546jpk0hCzhxuK3nXqKhslyaTDimdGrey7eEr
+    
     # DEMO_KEY : works on mars data examples off api document site
 
     # Mars Rover API calls
