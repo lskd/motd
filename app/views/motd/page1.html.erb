@@ -1,0 +1,28 @@
+<br><hr><hr>
+<center><h2><i>Zen & Weather : 2 new Movies </i></h2></center>
+<hr><hr>
+<!-- motd/page2 failed cause we already live at /motd controller -->
+<!--  so we added / infront of motd to base our route from root -->
+
+  <center>
+      <%= @zen2 %>
+
+  <hr>
+<img src ="<%= @abstract_image %>">
+<hr>
+<!--  below is debug link to page two prior to form placement-->
+<!-- <center><a href="/motd/page2"><i>Zip to Zen Form </a></center> -->
+<i>
+  <%= form_tag("/page2", method: "post") do %>
+    <%= label_tag(:txt, "Zipcode the moment : ") %>
+    <%= text_field_tag(:zipcode) %>
+    <%= submit_tag("Here 'n Now ") %>
+  <% end %>
+
+  <hr><hr>
+
+<br>
+<!-- Modify data from weathering function to represent todays current weather -->
+Temperature is : <%= @current_weather = @weather["currently"]["temperature"] %></i>
+<hr>
+</center>
