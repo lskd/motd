@@ -7,6 +7,11 @@ class MotdController < ApplicationController
   # CONSTANTS are in capitals
   APP_NAME = "http-party"
 
+  # ENV Variables expected to be set in rails app directory
+  # These are referenced as below
+  ##     ENV["NASA_MOTD_API_KEY"]
+  ##     ENV["MASHAPE_MOTD_API_KEY"]
+
   def index
   end
 
@@ -15,9 +20,10 @@ class MotdController < ApplicationController
 
     # github requires api calls to include a User-Agent in the header
     # headers tag and the APP_NAME variable define and set this attribute
-    @zen = HTTParty.get('https://api.github.com/zen', headers: {"User-Agent" => APP_NAME}) # zen2 ratelimit
-    # swap zen2 and zen for live use
+    @zen = HTTParty.get('https://api.github.com/zen', headers: {"User-Agent" => APP_NAME}) # APP_NAME defined above as constant
+    # swap out zen for zen2 to avoid ratelimit in testing
     # @zen2 = "Space vacuums Sun-Stars for the Dark Forest treaty"
+
     @abstract_image = "http://lorempixel.com/900/200/abstract" # 900 px width
     #@abstract_image = "http://lorempixel.com/750/200/abstract" # almost banner
     #@abstract_image = "http://lorempixel.com/450/300/abstract" # too square
@@ -74,13 +80,11 @@ class MotdController < ApplicationController
       mars_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/#{@mars_rover}/photos?sol=#{@sol}&camera=#{@mars_cams}&api_key=#{nasa_motd_api}" # swap in DEMO_KEY if failing
       @mars_rover_data = HTTParty.get(mars_url) # ingress data
 ## Above :
-## @mars_rover_data set to nil or an empty hash for default test
-## uncomment the randmized default setup for production testing
-## leave for designing so we don't slip our rate limit
+## set @mars_rover_data to nil for testing defaults
 
 
       #Conditional check for nil and define default if found
-            # other checks, not used
+            # other checks, not used this round
             # a ||= b   .blank?   variable = id if variable.blank?
       if @mars_rover_data["photos"].nil?
 
