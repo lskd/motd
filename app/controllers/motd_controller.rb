@@ -46,9 +46,7 @@ class MotdController < ApplicationController
 
 
   def spaceimage
-    ##{<%= Date.today.to_s %>} # Inline style
-    # wasn't working so we set it to an instance which was then
-    # inlined-interporlation within url string
+    # Define today's date
     @date_now = Date.today.to_s
 
     # Set api key
@@ -81,7 +79,7 @@ class MotdController < ApplicationController
       @mars_rover_data = HTTParty.get(mars_url) # ingress data
 ## Above :
 ## set @mars_rover_data to nil for testing defaults
-
+          #render plain: @mars_rover_data # Raw data check
 
       #Conditional check for nil and define default if found
             # other checks, not used this round
@@ -96,6 +94,7 @@ class MotdController < ApplicationController
 
         # Set @mars_photo_url to use randomized default image
         @mars_photo_url = @random_roover_default_img_src
+        @where_mars_rover_set = "Mars data set from the nil conditional"
         # Single Default defined below is moving towards deprecation
         # @mars_photo_url ="http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01004/opgs/edr/fcam/FRB_486615455EDR_F0481570FHAZ00323M_.JPG"
 
@@ -103,6 +102,7 @@ class MotdController < ApplicationController
         # We have valid data :
         # Set the img_src from @mars_rover_data block
         @mars_photo_url = @mars_rover_data["photos"][0]["img_src"]
+        @where_mars_rover_set = "Mars data set from the api data call"
       end
   end
 

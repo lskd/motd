@@ -1,7 +1,8 @@
 <small><small><small><small><a href="/"><i>MOTD replay</a></i></small></small></small></small>
 <br><hr><hr>
 <center><h2><i> <%= @zen2 %></i></h2></center>
-
+<!-- Setup a test output to see at which stage the mars rover data is stored -->
+<!-- <h1> Set at <%= @where_mars_rover_set %></h1> -->
 <hr><hr>
 <br>
 <!-- Modify data from weathering function to represent todays current weather -->
@@ -16,14 +17,14 @@ Lows's for today :
 <h4><i>Mars <%= @capital_rover %> Roover</i><br></h4>
 <img width="720" src="<%= @mars_photo_url %>">
 <!-- <img width="720" src="<%#= @mars_rover_data["photos"][0]["img_src"] %>"> -->
-</center><hr><br>
+</center><hr><hr><br>
 <%#= Date.today.to_s %>
 <!-- Date function poc to spaceimage url call with date inlined-interporlation -->
 <center>
-    <%= @spacepix["title"] %>
+    <h4><i><%= @spacepix["title"] %></i></h4>
 <br>
 <img width="720" src="<%= @spacepix["url"] %>">
-<br>
+<br><br>
 Details : <%= @spacepix["explanation"] %>
 </center>
 <hr>
