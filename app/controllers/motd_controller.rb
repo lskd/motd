@@ -11,11 +11,13 @@ class MotdController < ApplicationController
   end
 
   def page1
+
+
     # github requires api calls to include a User-Agent in the header
     # headers tag and the APP_NAME variable define and set this attribute
-#   @zen = HTTParty.get('https://api.github.com/zen', headers: {"User-Agent" => APP_NAME}) # zen2 ratelimit
+    @zen = HTTParty.get('https://api.github.com/zen', headers: {"User-Agent" => APP_NAME}) # zen2 ratelimit
     # swap zen2 and zen for live use
-    @zen2 = "Space vacuums Sun-Stars for the Dark Forest treaty"
+    # @zen2 = "Space vacuums Sun-Stars for the Dark Forest treaty"
     @abstract_image = "http://lorempixel.com/900/200/abstract" # 900 px width
     #@abstract_image = "http://lorempixel.com/750/200/abstract" # almost banner
     #@abstract_image = "http://lorempixel.com/450/300/abstract" # too square
@@ -30,9 +32,11 @@ class MotdController < ApplicationController
     # which is instance variable @spacepix & @weather
     # this instance variable @spacepix & @weather is what the view calls
     # within a inline ruby <%=  %> tag call
+    page1
     spaceimage
     weathering(params[:zipcode])
   end
+
 
 
   def spaceimage
@@ -41,15 +45,20 @@ class MotdController < ApplicationController
     # inlined-interporlation within url string
     @date_now = Date.today.to_s
 
+    # Set api key
+    nasa_motd_api = ENV["NASA_MOTD_API_KEY"] # these won't be in view so no @
+
     # Sets the space url for inlined-interporlation
-      space_url = "https://api.data.gov/nasa/planetary/apod?date=#{@date_now}&api_key=DEMO_KEY"
+      space_url = "https://api.data.gov/nasa/planetary/apod?date=#{@date_now}&api_key=#{nasa_motd_api}"
       @spacepix = HTTParty.get(space_url) # ingress data into @spacepix instance
+
+      # remove for production (avoiding rate limit)
+      #@spacepix = "http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044450000405085D01_DXXX.jpg"
+
     # old API key no longer works : nasa's side?, I reckon true
-    
     # DEMO_KEY : works on mars data examples off api document site
 
     # Mars Rover API calls
-    # Starting with Curiosity
     # Cams of interest navcam, rhaz, fhaz - (Hazard Avoidance Cams)
     # sol = days on mars
     # Lowest Common Dinominator of Sol days is the Curiosity rover (lcd)
@@ -61,10 +70,11 @@ class MotdController < ApplicationController
       @mars_cams = %w(navcam mast rhaz fhaz).shuffle.first #pick a cam any cam
       @mars_rover = %w(curiosity spirit opportunity).shuffle.first #pick a rover
       @capital_rover = @mars_rover.capitalize # slip around view limitation atm
-      mars_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/#{@mars_rover}/photos?sol=#{@sol}&camera=#{@mars_cams}&api_key=DEMO_KEY"
-      @mars_rover_data = {} #nil ## test HTTParty.get(mars_url) # ingress data
+
+      mars_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/#{@mars_rover}/photos?sol=#{@sol}&camera=#{@mars_cams}&api_key=#{nasa_motd_api}" # swap in DEMO_KEY if failing
+      @mars_rover_data = HTTParty.get(mars_url) # ingress data
 ## Above :
-## @mars_rover_data set to nil for default test
+## @mars_rover_data set to nil or an empty hash for default test
 ## uncomment the randmized default setup for production testing
 ## leave for designing so we don't slip our rate limit
 

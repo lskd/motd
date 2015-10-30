@@ -1,6 +1,7 @@
 <small><small><small><small><a href="/"><i>MOTD replay</a></i></small></small></small></small>
 <br><hr><hr>
-<center><h2><i>Zen->Yoda Movie_here and Weather_here</i></h2></center>
+<center><h2><i> <%= @zen2 %></i></h2></center>
+
 <hr><hr>
 <br>
 <!-- Modify data from weathering function to represent todays current weather -->
@@ -15,7 +16,7 @@ Lows's for today :
 <h4><i>Mars <%= @capital_rover %> Roover</i><br></h4>
 <img width="720" src="<%= @mars_photo_url %>">
 <!-- <img width="720" src="<%#= @mars_rover_data["photos"][0]["img_src"] %>"> -->
-</center><hr>
+</center><hr><br>
 <%#= Date.today.to_s %>
 <!-- Date function poc to spaceimage url call with date inlined-interporlation -->
 <center>
