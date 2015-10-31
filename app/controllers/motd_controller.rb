@@ -28,6 +28,17 @@ class MotdController < ApplicationController
     #@abstract_image = "http://lorempixel.com/750/200/abstract" # almost banner
     #@abstract_image = "http://lorempixel.com/450/300/abstract" # too square
 
+    # # Yoda Talk using mashape api call
+    # # This works in irb but not in controller atm. hrm..
+    # # Error response references heroku failure though I'm not hitting heroku
+    # mashape_motd_api_key = ENV["MASHAPE_MOTD_API_KEY"]
+    # @zen_to_yoda = HTTParty.get("https://yoda.p.mashape.com/yoda?sentence=#{@zen2}",
+    #   headers:{
+    #     "X-Mashape-Key" => mashape_motd_api_key,
+    #     "Accept" => "text/plain"
+    #   })
+    #   @yoda_response = @zen_to_yoda
+
     ## Calling in the Weathering function so the view can pull data
     weathering()
   end
@@ -77,9 +88,9 @@ class MotdController < ApplicationController
 
       mars_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/#{@mars_rover}/photos?sol=#{@sol}&camera=#{@mars_cams}&api_key=#{nasa_motd_api}" # swap in DEMO_KEY if failing
       @mars_rover_data = HTTParty.get(mars_url) # ingress data
-## Above :
-## set @mars_rover_data to nil for testing defaults
-          #render plain: @mars_rover_data # Raw data check
+      ## Above :
+      ## set @mars_rover_data to nil(@mars_rover_data = {})  for testing defaults
+                #render plain: @mars_rover_data # Raw data check
 
       #Conditional check for nil and define default if found
             # other checks, not used this round
