@@ -18,3 +18,5 @@ Nasa's Rover images
 * randomly selects camera based on 4 cameras consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
 * randomly selected Sol days on the Lowest Common Denominator between or yougest active rover, Curiosity.
 * randomly selects from a collection static images on days no rover images are present 
+
+TODO : push github's Zen of the day thru Yoda api or theme'd slang adjustments
