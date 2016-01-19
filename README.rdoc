@@ -16,7 +16,7 @@ Nasa's Image of the day
 
 Nasa's Rover images
 * randomly selects camera based on 4 cameras(navcam mast rhaz fhaz) consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
-* randomly selected Sol days on the Lowest Common Denominator between or yougest active rover, Curiosity.
+* randomly selected Sol days on the LCD, or yougest active rover, Curiosity @ 1120 sol days.
 * randomly selects from a collection static images on days no rover images are present 
 
 
