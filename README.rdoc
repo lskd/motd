@@ -2,9 +2,9 @@
 
 ==MOTD : Muse of the Day 
 
-* aka Message of the Day
+* aka  _Message_ _of_ _the_ _Day_
 
-MOTD app uses api endpoints to provide dynamic info.
+*MOTD*   app uses api endpoints to provide dynamic info.
 
 Weather info based on zipcode translation to Latitude & Longitude
 
@@ -19,4 +19,5 @@ Nasa's Rover images
 * randomly selected Sol days on the Lowest Common Denominator between or yougest active rover, Curiosity.
 * randomly selects from a collection static images on days no rover images are present 
 
-TODO : push github's Zen of the day thru Yoda api
+
+_TODO_ : push github's Zen of the day thru Yoda api
