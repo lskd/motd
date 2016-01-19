@@ -1,22 +1,15 @@
-== README
 
-#MOTD : Muse of the Day 
 
-Things you may want to cover:
+==MOTD : Muse of the Day 
 
-* Ruby version
+* aka Message of the Day 
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+MOTD app uses api endpoints to provide dynamica info. 
+Weather info based on zipcode translation to Latitude & Longitude
+Github's Zen of the day api
+Random Abstract image api request
+Nasa's Image of the day 
+Nasa's Rover images 
+* randomly selects camera based on 4 cameras consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
+* randomly selected Sol days on the Lowest Common Denominator between or yougest active rover, Curiosity.
+* randomly selects from a collection static images on days no rover images are present 
