@@ -4,10 +4,10 @@
 
 * aka Message of the Day 
 
-MOTD app uses api endpoints to provide dynamica info. 
-Weather info based on zipcode translation to Latitude & Longitude
-Github's Zen of the day api
-Random Abstract image api request
+MOTD app uses api endpoints to provide dynamic info. \
+Weather info based on zipcode translation to Latitude & Longitude \
+Github's Zen of the day api \
+Random Abstract image api request \
 Nasa's Image of the day 
 Nasa's Rover images 
 * randomly selects camera based on 4 cameras consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
