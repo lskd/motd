@@ -4,12 +4,17 @@
 
 * aka Message of the Day
 
-<p> MOTD app uses api endpoints to provide dynamic info.</p>
-<p> Weather info based on zipcode translation to Latitude & Longitude </p>
-<p> Github's Zen of the day api </p>
-<p> Random Abstract image api request </p>
-<p> Nasa's Image of the day </p>
-<p> Nasa's Rover images </p>
+MOTD app uses api endpoints to provide dynamic info.
+
+Weather info based on zipcode translation to Latitude & Longitude
+
+Github's Zen of the day api
+
+Random Abstract image api request
+
+Nasa's Image of the day
+
+Nasa's Rover images
 * randomly selects camera based on 4 cameras consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
 * randomly selected Sol days on the Lowest Common Denominator between or yougest active rover, Curiosity.
 * randomly selects from a collection static images on days no rover images are present 
