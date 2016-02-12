@@ -1,7 +1,44 @@
 // Place all the styles related to the motd controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-body { padding-top: 10px; }
+// Serenity : #92A8D1
+// Rose Quartz : #F7CAC9
+// 40deg was 4CB8C4 10% & EAECC6 100%
+body {
+   height: 100%;
+  background: -webkit-linear-gradient(267deg, #92A8D1 13%, #F7CAC9 80%);
+  background:    -moz-linear-gradient(267deg, #92A8D1 13%, #F7CAC9 80%);
+  background:     -ms-linear-gradient(267deg, #92A8D1 13%, #F7CAC9 80%);
+  background:      -o-linear-gradient(267deg, #92A8D1 13%, #F7CAC9 80%);
+  background:         linear-gradient(267deg, #92A8D1 13%, #F7CAC9 80%);
+
+  // background: #8b0000;
+  //                background: -webkit-linear-gradient( 293deg, #8b0000 18%, #ffff00 100%);
+  //                background:    -moz-linear-gradient( 293deg, #8b0000 18%, #ffff00 100%);
+  //                background:     -ms-linear-gradient( 293deg, #8b0000 18%, #ffff00 100%);
+  //                background:      -o-linear-gradient( 293deg, #8b0000 18%, #ffff00 100%);
+  //                background:         linear-gradient( 293deg, #8b0000 18%, #ffff00 100%);
+
+              //  background-color: lightblue;
+              //  background-color: #92A8D1; // serenity // // #89ABE3 secondary
+  // background-color: #f8d4d3; // #F7CAC9; // rose quartz // #F2DDDE secondary
+  //             //  background-color: #c9f6f7; // #c9f6f7 complementary
+  //
+  //              background-image:
+  //              radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+  //              radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+  //              radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+  //              radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+  //              background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  //              background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+
+
+ //  font-family: 'Lato', sans-serif;
+ font-family: 'Dosis', sans-serif;
+ // font-family: 'Cutive', serif;
+}
+
+// body { padding-top: 10px; }
 a:link { text-decoration: none; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: underline; }
