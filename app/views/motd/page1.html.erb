@@ -1,16 +1,16 @@
-<br><hr><hr>
+<br><hr class="fade"><hr class="fade">
 <center><h3><i>The Weather of Zen </i></h3></center>
-<hr><hr>
+<hr class="fade"><hr class="fade">
 <!-- motd/page2 failed cause we already live at /motd controller -->
 <!--  so we added / infront of motd to base our route from root -->
 
   <center>
       <h3><%= @zen %></h3>
-      <br><hr>
+      <br><hr class="fade">
 
-  <hr>
+  <hr class="fade">
 <img src ="<%= @abstract_image %>">
-<hr>
+<hr class="fade">
 <!--  below is debug link to page two prior to form placement-->
 <!-- <center><a href="/motd/page2"><i>Zip to Zen Form </a></center> -->
 <i>
@@ -20,10 +20,10 @@
     <%= submit_tag("Here 'n Now ") %>
   <% end %>
 
-  <hr><hr>
+  <hr class="fade"><hr class="fade">
 
 <br>
 <!-- Modify data from weathering function to represent todays current weather -->
 Temperature is : <%= @current_weather = @weather["currently"]["temperature"] %></i>
-<hr>
+<hr class="fade">
 </center>
