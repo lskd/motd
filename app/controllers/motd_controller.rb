@@ -61,17 +61,18 @@ class MotdController < ApplicationController
     @date_now = Date.today.to_s
 
     # Set api key
-    nasa_motd_api = ENV["NASA_MOTD_API_KEY"] # these won't be in view so no @
-
+    if ENV["NASA_MOTD_API_KEY"].nil?
+      nasa_motd_api = "DEMO_KEY"
+    else
+      nasa_motd_api = ENV["NASA_MOTD_API_KEY"]
+    end
     # Sets the space url for inlined-interporlation
-      space_url = "https://api.data.gov/nasa/planetary/apod?date=#{@date_now}&api_key=#{nasa_motd_api}"
+      space_url = "https://api.nasa.gov/planetary/apod?date=#{@date_now}&api_key=#{nasa_motd_api}"
       @spacepix = HTTParty.get(space_url) # ingress data into @spacepix instance
 
-      # remove for production (avoiding rate limit)
+      # staticly set for dev environment (avoiding rate limit)
       #@spacepix = "http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044450000405085D01_DXXX.jpg"
 
-    # old API key no longer works : nasa's side?, I reckon true
-    # DEMO_KEY : works on mars data examples off api document site
 
     # Mars Rover API calls
     # Cams of interest navcam, rhaz, fhaz - (Hazard Avoidance Cams)
@@ -97,7 +98,7 @@ class MotdController < ApplicationController
             # a ||= b   .blank?   variable = id if variable.blank?
       if @mars_rover_data["photos"].nil?
 
-        # We have invalid data from @mars_rover_data
+        # When we have invalid data from @mars_rover_data set known defaults
         # Set default rover name
         @capital_rover = "Curiosity"
         # Set random default images, shuffled.last # cause first is over-rated atm
