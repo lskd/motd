@@ -15,18 +15,18 @@ Lows's for today :
 
 <hr class="fade">
 
-<h4 class="cutive">Mars &nbsp;<i><%= @capital_rover %></i> &nbsp; Roover<br></h4>
+<h4 class="cutive">Mars &nbsp;<i><%= @mars_rover.capitalize %></i> &nbsp; Roover<br></h4>
     <img width="720" src="<%= @mars_photo_url %>">
 <hr class="fade"><hr class="fade"><br>
 
       <% if @spacepix["media_type"] = "video" %>
-        Title : <%= @spacepix["title"] %>
+        <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
           <br>
           <iframe max-width="720" src="<%= @spacepix["url"] %>"  frameborder="0" allowfullscreen></iframe>
               <br><br>
             Details : <%= @spacepix["explanation"] %>
       <% else %>
-        Title : <%= @spacepix["title"] %>
+        <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
           <br>
             <img width="720" src="<%= @spacepix["url"] %>">
               <br><br>

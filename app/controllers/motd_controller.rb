@@ -21,12 +21,11 @@ class MotdController < ApplicationController
     # github requires api calls to include a User-Agent in the header
     # headers tag and the APP_NAME variable define and set this attribute
     @zen = HTTParty.get('https://api.github.com/zen', headers: {"User-Agent" => APP_NAME}) # APP_NAME defined above as constant
-    # swap out zen for zen2 to avoid ratelimit in testing
+    # swap out zen for zen2 to avoid ratelimit in testing & uncomment @zen2 below
     # @zen2 = "Space vacuums Sun-Stars for the Dark Forest treaty"
 
     @abstract_image = "http://lorempixel.com/900/200/abstract" # 900 px width
     #@abstract_image = "http://lorempixel.com/750/200/abstract" # almost banner
-    #@abstract_image = "http://lorempixel.com/450/300/abstract" # too square
 
     # # Yoda Talk using mashape api call
     # # This works in irb but not in controller atm. hrm..
@@ -66,11 +65,12 @@ class MotdController < ApplicationController
     else
       nasa_motd_api = ENV["NASA_MOTD_API_KEY"]
     end
+
     # Sets the space url for inlined-interporlation
       space_url = "https://api.nasa.gov/planetary/apod?date=#{@date_now}&api_key=#{nasa_motd_api}"
       @spacepix = HTTParty.get(space_url) # ingress data into @spacepix instance
 
-      # staticly set for dev environment (avoiding rate limit)
+      # set static image in dev environment to avoid rate limits
       #@spacepix = "http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044450000405085D01_DXXX.jpg"
 
 
@@ -85,7 +85,7 @@ class MotdController < ApplicationController
       @sol = rand(12...1120) # random curiosity sol days as lcd
       @mars_cams = %w(navcam mast rhaz fhaz).shuffle.first #pick a cam any cam
       @mars_rover = %w(curiosity spirit opportunity).shuffle.first #pick a rover
-      @capital_rover = @mars_rover.capitalize # slip around view limitation atm
+      # @capital_rover = @mars_rover.capitalize # slip around view limitation atm
 
       mars_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/#{@mars_rover}/photos?sol=#{@sol}&camera=#{@mars_cams}&api_key=#{nasa_motd_api}" # swap in DEMO_KEY if failing
       @mars_rover_data = HTTParty.get(mars_url) # ingress data
@@ -100,29 +100,28 @@ class MotdController < ApplicationController
 
         # When we have invalid data from @mars_rover_data set known defaults
         # Set default rover name
-        @capital_rover = "Curiosity"
+        # @capital_rover = "Curiosity"
+        @mars_rover = "Curiosity"
+
         # Set random default images, shuffled.last # cause first is over-rated atm
         @random_roover_default_img_src = ["http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01105/opgs/edr/fcam/FRB_495583818EDR_F0500000FHAZ00323M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00478/opgs/edr/ncam/NLB_439921111EDR_F0240366NCAM00399M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00786/opgs/edr/fcam/FLB_467267584EDR_F0440036FHAZ00323M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00867/opgs/edr/ncam/NLB_474458330EDR_F0450000NCAM00320M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044450000405085D01_DXXX.jpg", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01004/opgs/edr/fcam/FRB_486615455EDR_F0481570FHAZ00323M_.JPG"].shuffle.last
 
         # Set @mars_photo_url to use randomized default image
         @mars_photo_url = @random_roover_default_img_src
-        @where_mars_rover_set = "Mars data set from the nil conditional"
-        # Single Default defined below is moving towards deprecation
-        # @mars_photo_url ="http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01004/opgs/edr/fcam/FRB_486615455EDR_F0481570FHAZ00323M_.JPG"
 
       else
         # We have valid data :
         # Set the img_src from @mars_rover_data block
         @mars_photo_url = @mars_rover_data["photos"][0]["img_src"]
-        @where_mars_rover_set = "Mars data set from the api data call"
       end
   end
 
-  # weathering method returns @weather instance
+
+  # the weathering method returns the @weather instance
   # set default values for page1 view to set @current_weather
   # look to page2 action (eof) for params pass of zip to weathering method call
-  def weathering(zip = 90254) # sets a default zip for page1(hermosa beach area)
-  # render plain: zip  # render out the plan zip value
+  def weathering(zip = 90254) # set default zip for page1(hermosa beach area)
+  # render plain: zip  # need debugging?
 
   # Convert Zipcode to latitude & longitude
     @zip_to_latlong = HTTParty.get("http://api.zippopotam.us/us/#{zip}")
@@ -136,7 +135,7 @@ class MotdController < ApplicationController
         @lng = "-118.3955"
 
       else
-        # We have valid data :
+        # Valid data :
         # Set the latitude(lat) & longitude(lng) from @zip_to_lat block
         @lat = @zip_to_latlong['places'][0]['latitude']
         @lng = @zip_to_latlong['places'][0]['longitude']
