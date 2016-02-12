@@ -4,7 +4,7 @@
 
 <br>
   <hr class="fade">
-  <center><h2><i> <%= @zen %></i></h2></center>
+  <center><h2 class="dosis"><i> <%= @zen %></i></h2></center>
   <hr class="fade">
 <br>
 <%#<!-- Update weather data, represent current weather -->%>
@@ -15,20 +15,24 @@ Lows's for today :
 
 <hr class="fade">
 
-<h4>Mars &nbsp;<i><%= @capital_rover %></i> &nbsp; Roover<br></h4>
+<h4 class="cutive">Mars &nbsp;<i><%= @capital_rover %></i> &nbsp; Roover<br></h4>
     <img width="720" src="<%= @mars_photo_url %>">
-</center><hr class="fade"><hr class="fade"><br>
+<hr class="fade"><hr class="fade"><br>
 
-  <center>
-    <h4><i><%= @spacepix["title"] %></i></h4>
-      <br>
       <% if @spacepix["media_type"] = "video" %>
-        <iframe max-width="720" src="<%= @spacepix["url"] %>"  frameborder="0" allowfullscreen></iframe>
+        Title : <%= @spacepix["title"] %>
+          <br>
+          <iframe max-width="720" src="<%= @spacepix["url"] %>"  frameborder="0" allowfullscreen></iframe>
+              <br><br>
+            Details : <%= @spacepix["explanation"] %>
       <% else %>
+        Title : <%= @spacepix["title"] %>
+          <br>
             <img width="720" src="<%= @spacepix["url"] %>">
+              <br><br>
+            Details : <%= @spacepix["explanation"] %>
       <% end %>
-      <br><br>
-      Details : <%= @spacepix["explanation"] %>
+
   </center>
     <hr class="fade">
     <br>
