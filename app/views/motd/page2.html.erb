@@ -3,11 +3,12 @@
 </small></small></small></small>
 
 <br>
-  <hr class="fade">
+
+  <span style="opacity: 0.8;"><hr class="fade"></span>
   <center><i><span style="font-size: 130%"> <%= @zen %></span></i></center>
-  <hr class="fade">
+<span style="opacity: 0.5;"><hr class="fade50w"></span>
 <br>
-<%#<!-- Update weather data, represent current weather -->%>
+
 <center>
   <span style="opacity: 0.4;"><small>Highs :&nbsp;</small></span>
     <%= @max_weather = @weather["daily"]["data"][0]["temperatureMax"] %>
@@ -16,29 +17,45 @@
     <%= @min_weather = @weather["daily"]["data"][0]["temperatureMin"] %>
 
 <hr class="fade">
-
-<h4 class="cutive">Mars &nbsp;<i><%= @mars_rover.capitalize %></i> &nbsp; Roover<br></h4>
+<span style="opacity: 0.5;"><hr class="fade35w"></span><br>
+<h4 class="cutive">Mars &nbsp;<i><%= @mars_rover.capitalize %></i> &nbsp; Roover
+<span style="opacity: 0.2;"><hr class="fade19w"></span>
+</h4>
     <img width="720" src="<%= @mars_photo_url %>">
-<hr class="fade"><hr class="fade"><br>
+<span style="opacity: 0.3;"><hr class="fade50w"></span>
+<hr class="fade">
+<span style="opacity: 0.3;"><hr class="fade50w"></span>
+<br>
 
+<%# Check if our api hit the Over rate limit or nil, return over-rate limit error%>
+  <% if @spacepix["error"]["code"] == "OVER_RATE_LIMIT" || @spacepix == nil%>
+    <small><span style="opacity: 0.7;">Astronamy Picture <sup>2</sup>&nbsp;&nbsp; successfully achieved Over Rate Limit, try again later.</span></small>
+  <% else %>
+      <%# display condition for video or image by data["media_type"] %>
       <% if @spacepix["media_type"] = "video" %>
+      <div class="apodetails-box"><div class="apodetails">
         <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
           <br>
           <iframe max-width="720" src="<%= @spacepix["url"] %>"  frameborder="0" allowfullscreen></iframe>
               <br><br>
-            Details : <%= @spacepix["explanation"] %>
+              <span style="opacity: 0.3;"><hr class="fade50w"></span>
+            Details : <%= @spacepix["explanation"] %></div></div>
       <% else %>
-        <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
-          <br>
-            <img width="720" src="<%= @spacepix["url"] %>">
-              <br><br>
-            Details : <%= @spacepix["explanation"] %>
+        <div class="apodetails-box"><div class="apodetails">
+          <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
+            <br>
+              <img width="720" src="<%= @spacepix["url"] %>">
+                <br><br>
+                <span style="opacity: 0.4;"><hr class="fade50w"></span>
+              Details : <%= @spacepix["explanation"] %></div></div>
       <% end %>
+  <% end %>
 
   </center>
+  <span style="opacity: 0.4;"><hr class="fade35w"></span>
     <hr class="fade">
-    <br>
-  <hr class="strong-fade"><hr class="fade">
+  <span style="opacity: 0.3;"><hr class="fade19w"></span>
+
     <small><small><small><small>
       <a href="/"><i>MOTD replay</a></i>
     </small></small></small></small>

@@ -1,25 +1,22 @@
-<br><hr class="fade">
-
-  <center><h3 class="lato"><i> Muse of the Day </i></h3></center>
-<hr class="fade19w"><br>
+<br>
+  <hr class="fade">
+    <center><h3 class="lato"><i> Muse of the Day </i></h3></center>
+  <hr class="fade19w">
+<br>
   <center>
-      <span style="font-size: 130%"><%= @zen %></span><br><br>
-      <span style="opacity: 0.5;"><hr class="fade50w"></span><hr class="fade">
-<img src ="<%= @abstract_image %>">
-<hr class="fade">
-<%#<!--  below is debug link to page two prior to form placement-->
-# <!-- <center><a href="/motd/page2"><i>Zip to Zen Form </a></center> -->
-#%>
-<i>
-  <%= form_tag("/page2", method: "post") do %>
-
-    <%= text_field_tag :zipcode, nil, {placeholder: 'Zip Code', style: "font-style:italic", maxlength: 5, :onclick => 'if($(this).val()=="Zip Code"){$(this).val("");};'} %>
-
-    <%= submit_tag("Here 'n Now ") %>
-  <% end %>
-</i>
+    <span style="font-size: 130%"><%= @zen %></span><br><br>
+    <span style="opacity: 0.5;"><hr class="fade50w"></span><hr class="fade">
+  <div class="abstract_image">
+  </div>
+  <hr class="fade">
+  <i>
+    <%= form_tag("/page2", method: "post") do %>
+      <%= text_field_tag :zipcode, nil, {placeholder: 'Zip Code', style: "font-style:italic", maxlength: 5, :onclick => 'if($(this).val()=="Zip Code"){$(this).val("");};'} %>
+      <%= submit_tag("Here 'n Now ") %>
+    <% end %>
+  </i>
   <span style="opacity: 0.5;"><hr class="fade"><hr class="fade50w"></span>
-
-<span style="opacity: 0.4;">Hermosa Beach :</span> <%= @current_weather = @weather["currently"]["temperature"] %>
-<span style="opacity: 0.7;"><hr class="fade50w"><hr class="fade35w"><hr class="fade19w"></span>
-</center><br><br>
+    <span style="opacity: 0.4;">Hermosa Beach :</span> <%= @current_weather = @weather["currently"]["temperature"] %>
+  <span style="opacity: 0.7;"><hr class="fade50w"><hr class="fade35w"><hr class="fade19w"></span>
+  </center>
+<br><br>

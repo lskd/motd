@@ -1,7 +1,3 @@
-// Place all the styles related to the motd controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 // 2016 Pantone colors of the year
 // Serenity : #92A8D1
 // Rose Quartz : #F7CAC9
@@ -30,15 +26,14 @@ h3.lato {
 font-family: 'Lato', sans-serif;
 }
 
-
+/* links */
 a:link { text-decoration: none; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: underline; }
 a:active { text-decoration: underline; }
 
-
-/* Gradient transparent - color - transparent */
-
+/* hr fades light - dark center - light */
+/* width: value%; == hr.fadeVALUEw  where VALUE is the number before % */
 hr.fade19w {
   border: 0; height: 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
@@ -60,21 +55,12 @@ hr.fade50w {
   max-width: 750px;
 }
 
-
 hr.fade {
   border: 0; height: 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
   width: 80%;
  	max-width: 750px;
  }
-
-
-
-/* Gradient color1 - color2 - color1 */
-hr.strong-fade {
-  border: 0; height: .5px;
-  background: #333; background-image: linear-gradient(to right, #ccc, #333, #ccc); }
-
 
 /*  Zip Code and Submit asthetics  */
 $white_opaque: rgba(197, 197, 197, .4);
@@ -110,6 +96,55 @@ input[type="submit"] {
  text-align: center;
  &:hover {
    background: $dark;
-  //  color: white;
  }
+}
+
+/* Astronamy Picture of the Day Description container */
+#apodetails-box
+{
+    // padding:20px;
+    width:900px;
+    // color:#FFFFFF;
+    position:relative;
+    float:left;
+    margin:20px 90px;
+    overflow:hidden;
+    border-radius: 7px;
+    -webkit-box-shadow: 0 0 4px 3px rgba(0,0,0,.3);
+    box-shadow: 0 0 4px 4px rgba(0,0,0,.03);
+    padding: 1em 0;
+}
+
+#apodetails-box .transparency
+{
+    opacity:0.5;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    background-color:#000000;
+    width:990px;
+    height:1500px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:-1;
+}
+
+.apodetails
+{
+    position:relative;
+    margin: auto 4em auto;
+    text-align: center;
+    font-size: 0.9em;
+    opacity:0.9;
+    filter:alpha(opacity=90);
+    -moz-opacity:0.9;
+}
+
+div.abstract_image {
+  width: 900px;
+  height: 200px;
+  background: url(http://lorempixel.com/900/200/abstract/7);
+  /* horizontal-offset vertical-offset blur-radius  spread-radius rgba */
+  box-shadow: inset 0px 0px 80px 35px rgba(0,0,0,.6);
+  border-radius: 15px;
 }

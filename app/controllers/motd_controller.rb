@@ -18,15 +18,17 @@ class MotdController < ApplicationController
   def page1
 
 
-    # github requires api calls to include a User-Agent in the header
+    # github api call wants User-Agent sent in header
     # headers tag and the APP_NAME variable define and set this attribute
     @zen = HTTParty.get('https://api.github.com/zen', headers: {"User-Agent" => APP_NAME}) # APP_NAME defined above as constant
-    # swap out zen for zen2 to avoid ratelimit in testing & uncomment @zen2 below
+
+    # swap out zen for zen2 to avoid ratelimit & uncomment @zen2 below
     # @zen2 = "Space vacuums Sun-Stars for the Dark Forest treaty"
 
-    @abstract_image = "http://lorempixel.com/900/200/abstract" # 900 px width
-    #@abstract_image = "http://lorempixel.com/750/200/abstract" # almost banner
+    # Abstract image set in motd.css as div.abstract_image
+    # @abstract_image = "http://lorempixel.com/900/200/abstract" # 900 px width
 
+    # TODO
     # # Yoda Talk using mashape api call
     # # This works in irb but not in controller atm. hrm..
     # # Error response references heroku failure though I'm not hitting heroku
