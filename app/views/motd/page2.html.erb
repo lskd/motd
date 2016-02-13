@@ -4,13 +4,15 @@
 
 <br>
   <hr class="fade">
-  <center><h2 class="dosis"><i> <%= @zen %></i></h2></center>
+  <center><i><span style="font-size: 130%"> <%= @zen %></span></i></center>
   <hr class="fade">
 <br>
 <%#<!-- Update weather data, represent current weather -->%>
-<center>High's for today :
-    <%= @max_weather = @weather["daily"]["data"][0]["temperatureMax"] %><br>
-Lows's for today :
+<center>
+  <span style="opacity: 0.4;"><small>Highs :&nbsp;</small></span>
+    <%= @max_weather = @weather["daily"]["data"][0]["temperatureMax"] %>
+    <small><small>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</small></small>
+  <span style="opacity: 0.4;"><small>Lows :&nbsp;</small></span>
     <%= @min_weather = @weather["daily"]["data"][0]["temperatureMin"] %>
 
 <hr class="fade">

@@ -1,10 +1,10 @@
 <br><hr class="fade">
-<center><h3><i>The Weather of Zen </i></h3></center>
-<hr class="fade">
 
+  <center><h3 class="lato"><i> Muse of the Day </i></h3></center>
+<hr class="fade19w"><br>
   <center>
-      <div class="zen"><h3><%= @zen %></h3></div><br>
-      <hr class="fade"><hr class="fade">
+      <span style="font-size: 130%"><%= @zen %></span><br><br>
+      <span style="opacity: 0.5;"><hr class="fade50w"></span><hr class="fade">
 <img src ="<%= @abstract_image %>">
 <hr class="fade">
 <%#<!--  below is debug link to page two prior to form placement-->
@@ -18,10 +18,8 @@
     <%= submit_tag("Here 'n Now ") %>
   <% end %>
 </i>
-  <hr class="fade"><hr class="fade">
+  <span style="opacity: 0.5;"><hr class="fade"><hr class="fade50w"></span>
 
-<br>
-<!-- Modify data from weathering function to represent todays current weather -->
-Temperature is : <%= @current_weather = @weather["currently"]["temperature"] %>
-<hr class="fade">
-</center>
+<span style="opacity: 0.4;">Hermosa Beach :</span> <%= @current_weather = @weather["currently"]["temperature"] %>
+<span style="opacity: 0.7;"><hr class="fade50w"><hr class="fade35w"><hr class="fade19w"></span>
+</center><br><br>
