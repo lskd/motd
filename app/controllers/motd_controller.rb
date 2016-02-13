@@ -13,10 +13,6 @@ class MotdController < ApplicationController
   ##     ENV["MASHAPE_MOTD_API_KEY"]
 
   def index
-  end
-
-  def page1
-
 
     # github api call wants User-Agent sent in header
     # headers tag and the APP_NAME variable define and set this attribute
@@ -45,12 +41,12 @@ class MotdController < ApplicationController
   end
 
 
-  def page2
+  def weather_rover
     # spaceimage & weathering method/function/action returns last line of method
     # which is instance variable @spacepix & @weather
     # this instance variable @spacepix & @weather is what the view calls
     # within a inline ruby <%=  %> tag call
-    page1
+    index
     spaceimage
     weathering(params[:zipcode])
   end
@@ -120,9 +116,9 @@ class MotdController < ApplicationController
 
 
   # the weathering method returns the @weather instance
-  # set default values for page1 view to set @current_weather
+  # set default values for index view to set @current_weather
   # look to page2 action (eof) for params pass of zip to weathering method call
-  def weathering(zip = 90254) # set default zip for page1(hermosa beach area)
+  def weathering(zip = 90254) # set default zip for index(hermosa beach area)
   # render plain: zip  # need debugging?
 
   # Convert Zipcode to latitude & longitude

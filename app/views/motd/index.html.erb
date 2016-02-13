@@ -1,4 +1,27 @@
-<br><hr class="fade"><title>motd</title>
-<center><h2><i>Muse of The Day</i></h2></center>
-<hr class="fade">
-<center><a href="/page1"><i>Zen Now</i></a></center>
+<br>
+  <hr class="fade">
+    <center><h3 class="lato"><i> Muse of the Day </i></h3></center>
+  <hr class="fade19w">
+<br>
+  <center>
+    <span style="font-size: 130%"><%= @zen %></span><br><br>
+    <span style="opacity: 0.5;"><hr class="fade50w"></span><hr class="fade">
+  <div class="abstract_image">
+  </div>
+  <hr class="fade">
+  <i>
+
+    <%# form_tag("/weatherover", method: "post") do %>
+    <%= form_tag("/weatherover", method: "post") do %>
+      <%= text_field_tag :zipcode, nil, {placeholder: 'Zip Code', style: "font-style:italic", maxlength: 5, :onclick => 'if($(this).val()=="Zip Code"){$(this).val("");};'} %>
+      <%= submit_tag("Here 'n Now ") %>
+    <% end %>
+  </i>
+  <span style="opacity: 0.5;"><hr class="fade"><hr class="fade50w"></span>
+    <span style="opacity: 0.4;">Hermosa Beach :</span>
+      <%= @current_weather = @weather["currently"]["temperature"] %>
+  <span style="opacity: 0.6;"><hr class="fade50w">
+  <span style="opacity: 0.4;"><hr class="fade35w">
+  <span style="opacity: 0.3;"><hr class="fade19w"></span></span></span>
+  </center>
+<br><br>
