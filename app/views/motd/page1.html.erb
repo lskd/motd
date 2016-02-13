@@ -3,25 +3,25 @@
 <hr class="fade">
 
   <center>
-      <h3><%= @zen %></h3>
-      <br><hr class="fade">
-
-  <hr class="fade">
+      <div class="zen"><h3><%= @zen %></h3></div><br>
+      <hr class="fade"><hr class="fade">
 <img src ="<%= @abstract_image %>">
 <hr class="fade">
-<!--  below is debug link to page two prior to form placement-->
-<!-- <center><a href="/motd/page2"><i>Zip to Zen Form </a></center> -->
+<%#<!--  below is debug link to page two prior to form placement-->
+# <!-- <center><a href="/motd/page2"><i>Zip to Zen Form </a></center> -->
+#%>
 <i>
   <%= form_tag("/page2", method: "post") do %>
-    <%= label_tag(:txt, "Zipcode the moment : ") %>
-    <%= text_field_tag(:zipcode) %>
+
+    <%= text_field_tag :zipcode, nil, {placeholder: 'Zip Code', style: "font-style:italic", maxlength: 5, :onclick => 'if($(this).val()=="Zip Code"){$(this).val("");};'} %>
+
     <%= submit_tag("Here 'n Now ") %>
   <% end %>
-
+</i>
   <hr class="fade"><hr class="fade">
 
 <br>
 <!-- Modify data from weathering function to represent todays current weather -->
-Temperature is : <%= @current_weather = @weather["currently"]["temperature"] %></i>
+Temperature is : <%= @current_weather = @weather["currently"]["temperature"] %>
 <hr class="fade">
 </center>
