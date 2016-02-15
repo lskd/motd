@@ -22,15 +22,15 @@
   <h4 class="cutive">Mars &nbsp;<i><%= @mars_rover.capitalize %></i> &nbsp; Roover
 <span style="opacity: 0.2;"><hr class="fade19w"></span>
   </h4>
-    <img width="720" src="<%= @mars_photo_url %>"><br>
+    <img style="max-width: 720px" src="<%= @mars_photo_url %>"><br>
 <span style="opacity: 0.3;"><hr class="fade50w"></span>
 <hr class="fade">
 <span style="opacity: 0.3;"><hr class="fade50w"></span>
 <br>
 
-
+<div>
   <%# display condition for video or image by data["media_type"] %>
-  <% if @spacepix["media_type"] = "video" %>
+  <% if @spacepix["media_type"] == "video" %>
   <div class="apodetails-box"><div class="apodetails">
     <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
       <br>
@@ -38,19 +38,20 @@
           <br><br>
           <span style="opacity: 0.3;"><hr class="fade50w"></span>
         Details : <%= @spacepix["explanation"] %></div></div>
-  <% elsif @spacepix["media_type"] = "image" %>
-    <div class="apodetails-box"><div class="apodetails">
+  <% elsif @spacepix["media_type"] == "image" %>
+    <!-- <div class="apodetails-box"><div class="apodetails"> -->
       <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
         <br>
-          <img width="720" src="<%= @spacepix["url"] %>">
+          <img max-width="720" src="<%= @spacepix["url"] %>">
             <br><br>
             <span style="opacity: 0.4;"><hr class="fade50w"></span>
-          Details : <%= @spacepix["explanation"] %></div></div>
+          Details : <%= @spacepix["explanation"] %>
+        <!-- </div></div> -->
   <%# if api hit an Over rate limit or nil, return over-rate limit error%>
   <% elsif @spacepix["error"]["code"] == "OVER_RATE_LIMIT" || @spacepix == nil %>
       <small><span style="opacity: 0.7;">Astronamy Picture <sup>2</sup>&nbsp;&nbsp; successfully achieved Over Rate Limit, try again later.</span></small>
   <% end %>
-
+</div>
   </center>
   <span style="opacity: 0.4;"><hr class="fade35w"></span>
     <hr class="fade">
