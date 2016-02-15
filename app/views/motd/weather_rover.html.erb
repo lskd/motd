@@ -28,28 +28,27 @@
 <span style="opacity: 0.3;"><hr class="fade50w"></span>
 <br>
 
-<%# Check if our api hit the Over rate limit or nil, return over-rate limit error%>
-  <% if @spacepix["error"]["code"] == "OVER_RATE_LIMIT" || @spacepix == nil%>
-    <small><span style="opacity: 0.7;">Astronamy Picture <sup>2</sup>&nbsp;&nbsp; successfully achieved Over Rate Limit, try again later.</span></small>
-  <% else %>
-      <%# display condition for video or image by data["media_type"] %>
-      <% if @spacepix["media_type"] = "video" %>
-      <div class="apodetails-box"><div class="apodetails">
-        <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
-          <br>
-          <iframe max-width="720" src="<%= @spacepix["url"] %>"  frameborder="0" allowfullscreen></iframe>
-              <br><br>
-              <span style="opacity: 0.3;"><hr class="fade50w"></span>
-            Details : <%= @spacepix["explanation"] %></div></div>
-      <% else %>
-        <div class="apodetails-box"><div class="apodetails">
-          <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
-            <br>
-              <img width="720" src="<%= @spacepix["url"] %>">
-                <br><br>
-                <span style="opacity: 0.4;"><hr class="fade50w"></span>
-              Details : <%= @spacepix["explanation"] %></div></div>
-      <% end %>
+
+  <%# display condition for video or image by data["media_type"] %>
+  <% if @spacepix["media_type"] = "video" %>
+  <div class="apodetails-box"><div class="apodetails">
+    <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
+      <br>
+      <iframe max-width="720" src="<%= @spacepix["url"] %>"  frameborder="0" allowfullscreen></iframe>
+          <br><br>
+          <span style="opacity: 0.3;"><hr class="fade50w"></span>
+        Details : <%= @spacepix["explanation"] %></div></div>
+  <% elsif @spacepix["media_type"] = "image" %>
+    <div class="apodetails-box"><div class="apodetails">
+      <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
+        <br>
+          <img width="720" src="<%= @spacepix["url"] %>">
+            <br><br>
+            <span style="opacity: 0.4;"><hr class="fade50w"></span>
+          Details : <%= @spacepix["explanation"] %></div></div>
+  <%# if api hit an Over rate limit or nil, return over-rate limit error%>
+  <% elsif @spacepix["error"]["code"] == "OVER_RATE_LIMIT" || @spacepix == nil %>
+      <small><span style="opacity: 0.7;">Astronamy Picture <sup>2</sup>&nbsp;&nbsp; successfully achieved Over Rate Limit, try again later.</span></small>
   <% end %>
 
   </center>
