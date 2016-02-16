@@ -3,20 +3,21 @@
     <center><h3 class="lato"><i> Muse of the Day </i></h3></center>
   <hr class="fade19w">
 <br>
-  <center>
+  <center><%# Zen  %>
     <span style="font-size: 130%"><%= @zen %></span><br><br>
     <span style="opacity: 0.5;"><hr class="fade50w"></span><hr class="fade">
-  <div class="abstract_image">
+  <div class="abstract_image"><%# abstract image defined in motd.scss  %>
   </div>
   <hr class="fade">
   <i>
-
+    <%# Zipcode form object %>
     <%= form_tag("/weatherover", method: "post") do %>
       <%= text_field_tag :zipcode, nil, {placeholder: 'Zip Code', style: "font-style:italic", maxlength: 5, :onclick => 'if($(this).val()=="Zip Code"){$(this).val("");};'} %>
       <%= submit_tag("Here 'n Now ") %>
     <% end %>
   </i>
   <span style="opacity: 0.5;"><hr class="fade"><hr class="fade50w"></span>
+  <%# Display Weather for default area %>
     <span style="opacity: 0.4;"><%= @area %> :</span>
       <%= @current_weather = @weather["currently"]["temperature"] %>
   <span style="opacity: 0.6;"><hr class="fade50w">

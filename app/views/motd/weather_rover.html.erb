@@ -1,66 +1,71 @@
+<%# MOTD link returning to index  %>
 <small><small><small><small>
   <span style="opacity: 0.4; margin: auto 5em auto;">
     <%= link_to "MOTD", root_path %></span>
 </small></small></small></small>
 <br>
-
+<%# Zen from github   %>
   <span style="opacity: 0.8;"><hr class="fade"></span>
   <center><i><span style="font-size: 130%"> <%= @zen %></span></i></center>
 <span style="opacity: 0.5;"><hr class="fade50w"></span>
 <br>
 
-<center>
+  <%# TODO after formating apod description text appropirately remove excessive center tags %>
+  <center>
+
+  <%# Display Location with High & Low temps  %>
   <span style="opacity: 0.3;"><%= @area %></span><%# small dim for lighter side of page %>
     <span style="opacity: 0.9;"> <%# small dim of '|' for lighter side of page  %>
       <small><small>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</small></small></span>
   <span style="opacity: 0.4;"><small>Highs :&nbsp;</small></span>
-    <%= @max_weather = @weather["daily"]["data"][0]["temperatureMax"] %>
+    <%= @max_weather = @weather["daily"]["data"][0]["temperatureMax"] %> <%# max temp  %>
     <small><small>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</small></small>
   <span style="opacity: 0.4;"><small>Lows :&nbsp;</small></span>
-    <%= @min_weather = @weather["daily"]["data"][0]["temperatureMin"] %>
+    <%= @min_weather = @weather["daily"]["data"][0]["temperatureMin"] %> <%# min temp  %>
+    <hr class="fade">
+    <span style="opacity: 0.5;"><hr class="fade35w"></span><br>
 
-<hr class="fade">
 
-<span style="opacity: 0.5;"><hr class="fade35w"></span><br>
-  <h4 class="cutive">Mars &nbsp;<i><%= @mars_rover.capitalize %></i> &nbsp; Roover
-<span style="opacity: 0.2;"><hr class="fade19w"></span>
-  </h4>
-    <img style="max-width: 720px" src="<%= @mars_photo_url %>"><br>
-<span style="opacity: 0.3;"><hr class="fade50w"></span>
-<hr class="fade">
-<span style="opacity: 0.3;"><hr class="fade50w"></span>
-<br>
+<%# Display Rover Name %>
+<h4 class="cutive">Mars &nbsp;<i><%= @mars_rover.capitalize %></i> &nbsp; Roover</h4>
+  <span style="opacity: 0.2;"><hr class="fade19w"></span>
+<%# Display Rover Image %>
+<img style="max-width: 720px" src="<%= @mars_photo_url %>"><br>
+  <span style="opacity: 0.3;"><hr class="fade50w"></span>
+  <hr class="fade">
+  <span style="opacity: 0.3;"><hr class="fade50w"></span>
+  <br>
 
+<%# Astronomy Picture of the Day %>
 <div>
-  <%# display condition for video or image by data["media_type"] %>
-  <% if @spacepix["media_type"] == "video" %>
+  <%# media_type check for display method via data["media_type"] %>
+  <% if @spacepix["media_type"] == "video" %><%# iframe tag for video %>
   <div class="apodetails-box"><div class="apodetails">
-    <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
+    <div padding-bottom="3px"><small><span style="opacity: 0.7;"> Title :</span></small> <%= @spacepix["title"] %></div>
       <br>
       <iframe max-width="720" src="<%= @spacepix["url"] %>"  frameborder="0" allowfullscreen></iframe>
           <br><br>
           <span style="opacity: 0.3;"><hr class="fade50w"></span>
-        Details : <%= @spacepix["explanation"] %></div></div>
-  <% elsif @spacepix["media_type"] == "image" %>
-    <!-- <div class="apodetails-box"><div class="apodetails"> -->
-      <div padding-bottom="3px"><small> Title :</small> <%= @spacepix["title"] %></div>
+        <span style="opacity: 0.5;">Details : </span><%= @spacepix["explanation"] %></div></div>
+  <% elsif @spacepix["media_type"] == "image" %><%# img tag for video  %>
+      <div padding-bottom="3px"><small><span style="opacity: 0.7;"> Title :</span></small> <%= @spacepix["title"] %></div>
         <br>
           <img style="max-width: 720px" src="<%= @spacepix["url"] %>">
             <br><br>
             <span style="opacity: 0.4;"><hr class="fade50w"></span>
-          Details : <%= @spacepix["explanation"] %>
-        <!-- </div></div> -->
-  <%# if api hit an Over rate limit or nil, return over-rate limit error%>
+          <span style="opacity: 0.5;">Details : </span><%= @spacepix["explanation"] %>
+        </div></div>
+  <%# api Over rate limit or nil, return over-rate limit error%>
   <% elsif @spacepix["error"]["code"] == "OVER_RATE_LIMIT" || @spacepix == nil %>
-      <small><span style="opacity: 0.7;">Astronamy Picture <sup>2</sup>&nbsp;&nbsp; successfully achieved Over Rate Limit, try again later.</span></small>
+      <small><span style="opacity: 0.5;">Astronamy Picture <sup>2</sup>&nbsp;&nbsp; successfully achieved Over Rate Limit, try again later.</span></small>
   <% end %>
-</div>
-  </center>
+</div></center>
   <span style="opacity: 0.4;"><hr class="fade35w"></span>
     <hr class="fade">
   <span style="opacity: 0.3;"><hr class="fade19w"></span>
 
-    <small><small><small><small>
-      <span style="opacity: 0.7; margin: auto 5em auto;">
-        <%= link_to "MOTD", root_path %></span>
-    </small></small></small></small>
+<%# MOTD link returning to index  %>
+<small><small><small><small>
+  <span style="opacity: 0.7; margin: auto 5em auto;">
+    <%= link_to "MOTD", root_path %></span>
+</small></small></small></small>

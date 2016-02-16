@@ -143,6 +143,8 @@ class MotdController < ApplicationController
 
   # Pull the weather data in regards to latitude & longitude specs
     @weather = HTTParty.get("https://api.forecast.io/forecast/b6ec16c6daf2eaa642175d3a5d80d219/#{@lat},#{@lng}")
+
+    # TODO add fallbacks for api call failure
   end
 
 end
