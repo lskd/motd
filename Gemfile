@@ -36,4 +36,11 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Better Errors :: https://github.com/charliesome/better_errors
+  gem 'better_errors', group: :development
+
+  # Quiet assets in dev :: https://github.com/evrone/quiet_assets
+  # Turn loggin on, uncomment # config.quiet_assets = false in config/application.rb
+  # gem 'quiet_assets', group: :development
 end

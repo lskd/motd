@@ -22,5 +22,8 @@ module Motd
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Turn development assets logging on by uncommenting below 
+    # config.quiet_assets = false
   end
 end
