@@ -11,14 +11,13 @@
   <hr class="fade">
   <i>
 
-    <%# form_tag("/weatherover", method: "post") do %>
     <%= form_tag("/weatherover", method: "post") do %>
       <%= text_field_tag :zipcode, nil, {placeholder: 'Zip Code', style: "font-style:italic", maxlength: 5, :onclick => 'if($(this).val()=="Zip Code"){$(this).val("");};'} %>
       <%= submit_tag("Here 'n Now ") %>
     <% end %>
   </i>
   <span style="opacity: 0.5;"><hr class="fade"><hr class="fade50w"></span>
-    <span style="opacity: 0.4;">Hermosa Beach :</span>
+    <span style="opacity: 0.4;"><%= @area %> :</span>
       <%= @current_weather = @weather["currently"]["temperature"] %>
   <span style="opacity: 0.6;"><hr class="fade50w">
   <span style="opacity: 0.4;"><hr class="fade35w">

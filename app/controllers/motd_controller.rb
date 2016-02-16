@@ -37,7 +37,7 @@ class MotdController < ApplicationController
     #   @yoda_response = @zen_to_yoda
 
     ## Calling in the Weathering function so the view can pull data
-    weathering()
+    weathering() # Call weathering() with default zipcode for weather data request
   end
 
 
@@ -48,7 +48,7 @@ class MotdController < ApplicationController
     # within a inline ruby <%=  %> tag call
     index
     spaceimage
-    weathering(params[:zipcode])
+    weathering(params[:zipcode]) # use with submitted zipcode
   end
 
 
@@ -115,11 +115,11 @@ class MotdController < ApplicationController
   end
 
 
-  # the weathering method returns the @weather instance
-  # set default values for index view to set @current_weather
-  # look to page2 action (eof) for params pass of zip to weathering method call
+
+  # Return weather data
+  # default values for index view = 90254 hermosa beach
   def weathering(zip = 90254) # set default zip for index(hermosa beach area)
-  # render plain: zip  # need debugging?
+    # render plain: zip  # need debugging?
 
   # Convert Zipcode to latitude & longitude
     @zip_to_latlong = HTTParty.get("http://api.zippopotam.us/us/#{zip}")
@@ -131,12 +131,14 @@ class MotdController < ApplicationController
           # Corresponds to default zip 90254
         @lat = "33.8643"
         @lng = "-118.3955"
+        @area = "Hermosa Beach"
 
       else
         # Valid data :
         # Set the latitude(lat) & longitude(lng) from @zip_to_lat block
         @lat = @zip_to_latlong['places'][0]['latitude']
         @lng = @zip_to_latlong['places'][0]['longitude']
+        @area = @zip_to_latlong['places'][0]['place name']
       end
 
   # Pull the weather data in regards to latitude & longitude specs

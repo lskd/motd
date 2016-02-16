@@ -10,6 +10,9 @@
 <br>
 
 <center>
+  <span style="opacity: 0.3;"><%= @area %></span><%# small dim for lighter side of page %>
+    <span style="opacity: 0.9;"> <%# small dim of '|' for lighter side of page  %>
+      <small><small>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</small></small></span>
   <span style="opacity: 0.4;"><small>Highs :&nbsp;</small></span>
     <%= @max_weather = @weather["daily"]["data"][0]["temperatureMax"] %>
     <small><small>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</small></small>
