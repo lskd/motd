@@ -32,7 +32,7 @@ rails s
 within a firefox or chrome browser, goto localhost:3000
 ```
 
-* DEMO_KEY is used in MotdController for demo purposes. For extendted use, get your own api key from [NASA](https://api.nasa.gov/#getting-started)
+* DEMO_KEY is used in MotdController for demo purposes. Get and set your own api key from [NASA](https://api.nasa.gov/#getting-started) for extended use
 * Set your [NASA](https://api.nasa.gov/#getting-started) api key with ENV['NASA_MOTD_API_KEY'] in MotdController
 * rails server -e production requires ENV SECRET_KEY_BASE to be set
 
