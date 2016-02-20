@@ -1,6 +1,6 @@
 
 
-==MOTD : Muse of the Day 
+==MOTD : Muse of the Day
 
 * aka  _Message_ _of_ _the_ _Day_
 
@@ -17,7 +17,13 @@ Nasa's Image of the day
 Nasa's Rover images
 * randomly selects camera based on 4 cameras(navcam, mast, rhaz, fhaz) consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
 * randomly selected Sol days on the yougest active rover, Curiosity @ 1120 sol days.
-* randomly selects from a collection static images on days no rover images are present 
+* randomly selects from a collection static images on days no rover images are present
 
 
 _TODO_ : push github's Zen of the day thru Yoda api
+
+
+* rails server -e production requires ENV SECRET_KEY_BASE to be set
+
+* DEMO_KEY for NASA api calls
+* Set your [NASA](https://api.nasa.gov/#getting-started) api key with ENV['NASA_MOTD_API_KEY'] in MotdController
