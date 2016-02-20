@@ -15,10 +15,10 @@ Abstract image from [lorempixel's](lorempixel.com) api endpoint
 
 Nasa's [Astronomy picture of the day](http://apod.nasa.gov/apod/astropix.html) api [endpoint](https://api.nasa.gov/api.html#apod)
 
-Nasa's [Rover images](https://api.nasa.gov/api.html#MarsPhotos)
-* randomly selects camera based on 4 cameras(navcam, mast, rhaz, fhaz) consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
-* randomly selected Sol days on the youngest active rover, Curiosity @ 1120 sol days at time of writing.
-* fallback uses randomly selected image urls for nil api responses
+Nasa's [Rover images](https://api.nasa.gov/api.html#MarsPhotos) is randomly selected with Rover, Camera and Sol days variables
+* camera based on 4 cameras(navcam, mast, rhaz, fhaz) consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
+* Sol days on the youngest active rover, Curiosity @ 1120 sol days at time of writing.
+* nil responses fallback to a randomly selected image
 
 ___
 

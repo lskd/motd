@@ -1,150 +1,76 @@
 class MotdController < ApplicationController
 
-  # Defining a Constant outside the action but inside the class
-  # else Rails chums on chud over dynamic assignments to CONSTANTS
-  # the action/method is run multipletimes and the object id value changes
-  # even though the value definition stays the same..
-  # CONSTANTS are in capitals
-  APP_NAME = "http-party"
-
-  # ENV Variables expected to be set in rails app directory
-  # These are referenced as below
-  ##     ENV["NASA_MOTD_API_KEY"]
-  ##     ENV["MASHAPE_MOTD_API_KEY"]
+  APP_NAME = "motd"
+    # set ENV Variables in rails app directory or manage ENV with figaro
+    # ENV["NASA_MOTD_API_KEY"]
+    # ENV["MASHAPE_MOTD_API_KEY"]
+    # ENV["MASHAPE_MOTD_API_KEY"] # TODO
 
   def index
+    # Github api endpoint needs User-Agent sent within the header
+    @zen = HTTParty.get('https://api.github.com/zen', headers: {"User-Agent" => APP_NAME})
 
-    # github api call wants User-Agent sent in header
-    # headers tag and the APP_NAME variable define and set this attribute
-    @zen = HTTParty.get('https://api.github.com/zen', headers: {"User-Agent" => APP_NAME}) # APP_NAME defined above as constant
-
-    # swap out zen for zen2 to avoid ratelimit & uncomment @zen2 below
-    # @zen2 = "Space vacuums Sun-Stars for the Dark Forest treaty"
-
-    # Abstract image set in motd.css as div.abstract_image
-    # @abstract_image = "http://lorempixel.com/900/200/abstract" # 900 px width
-
-    # TODO
-    # # Yoda Talk using mashape api call
-    # # This works in irb but not in controller atm. hrm..
-    # # Error response references heroku failure though I'm not hitting heroku
+    # TODO Take github Zen quote and pipe thru yoda api request
     # mashape_motd_api_key = ENV["MASHAPE_MOTD_API_KEY"]
-    # @zen_to_yoda = HTTParty.get("https://yoda.p.mashape.com/yoda?sentence=#{@zen2}",
+    # @zen_to_yoda = HTTParty.get("https://yoda.p.mashape.com/yoda?sentence=#{@zen}",
     #   headers:{
     #     "X-Mashape-Key" => mashape_motd_api_key,
     #     "Accept" => "text/plain"
     #   })
     #   @yoda_response = @zen_to_yoda
 
-    ## Calling in the Weathering function so the view can pull data
-    weathering() # Call weathering() with default zipcode for weather data request
+    ## Weathering function using default zipcode for index weather data request
+    weathering()
   end
-
 
   def weather_rover
     # spaceimage & weathering method/function/action returns last line of method
     # which is instance variable @spacepix & @weather
-    # this instance variable @spacepix & @weather is what the view calls
-    # within a inline ruby <%=  %> tag call
     index
     spaceimage
-    weathering(params[:zipcode]) # use with submitted zipcode
+    weathering(params[:zipcode]) # uses submitted zipcode
   end
 
-
-
   def spaceimage
-    # Define today's date
     @date_now = Date.today.to_s
-
-    # Set api key
     if ENV["NASA_MOTD_API_KEY"].nil?
       nasa_motd_api = "DEMO_KEY"
     else
       nasa_motd_api = ENV["NASA_MOTD_API_KEY"]
     end
+    # NASA Astronomy Picture of the Day api request
+    space_url = "https://api.nasa.gov/planetary/apod?date=#{@date_now}&api_key=#{nasa_motd_api}"
+    @spacepix = HTTParty.get(space_url)
 
-    # Sets the space url for inlined-interporlation
-      space_url = "https://api.nasa.gov/planetary/apod?date=#{@date_now}&api_key=#{nasa_motd_api}"
-      @spacepix = HTTParty.get(space_url) # ingress data into @spacepix instance
+    # Mars Rover API call randomly selects a Rover, Cam, and Sol days
+    # Max sol = 1120 active images for Curiosity on 2015-10-13
+    @sol = rand(12...1120)
+    @mars_cams = %w(navcam mast rhaz fhaz).shuffle.first
+    @mars_rover = %w(curiosity spirit opportunity).shuffle.first
+    mars_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/#{@mars_rover}/photos?sol=#{@sol}&camera=#{@mars_cams}&api_key=#{nasa_motd_api}"
+    @mars_rover_data = HTTParty.get(mars_url)
 
-      # set static image in dev environment to avoid rate limits
-      #@spacepix = "http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044450000405085D01_DXXX.jpg"
-
-
-    # Mars Rover API calls
-    # Cams of interest navcam, rhaz, fhaz - (Hazard Avoidance Cams)
-    # sol = days on mars
-    # Lowest Common Dinominator of Sol days is the Curiosity rover (lcd)
-    # Max sol & Max days = 1132 & 2015-10-13 respectively for Curiosity
-    #
-    # Randommize the sol date per call
-    # Note : Not all cams are used daily, so this may return fugly nilz
-      @sol = rand(12...1120) # random curiosity sol days as lcd
-      @mars_cams = %w(navcam mast rhaz fhaz).shuffle.first #pick a cam any cam
-      @mars_rover = %w(curiosity spirit opportunity).shuffle.first #pick a rover
-      # @capital_rover = @mars_rover.capitalize # slip around view limitation atm
-
-      mars_url = "https://api.nasa.gov/mars-photos/api/v1/rovers/#{@mars_rover}/photos?sol=#{@sol}&camera=#{@mars_cams}&api_key=#{nasa_motd_api}" # swap in DEMO_KEY if failing
-      @mars_rover_data = HTTParty.get(mars_url) # ingress data
-      ## Above :
-      ## set @mars_rover_data to nil(@mars_rover_data = {})  for testing defaults
-                #render plain: @mars_rover_data # Raw data check
-
-      #Conditional check for nil and define default if found
-            # other checks, not used this round
-            # a ||= b   .blank?   variable = id if variable.blank?
-      if @mars_rover_data["photos"].nil?
-
-        # When we have invalid data from @mars_rover_data set known defaults
-        # Set default rover name
-        # @capital_rover = "Curiosity"
-        @mars_rover = "Curiosity"
-
-        # Set random default images, shuffled.last # cause first is over-rated atm
-        @random_roover_default_img_src = ["http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01105/opgs/edr/fcam/FRB_495583818EDR_F0500000FHAZ00323M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00478/opgs/edr/ncam/NLB_439921111EDR_F0240366NCAM00399M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00786/opgs/edr/fcam/FLB_467267584EDR_F0440036FHAZ00323M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00867/opgs/edr/ncam/NLB_474458330EDR_F0450000NCAM00320M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044450000405085D01_DXXX.jpg", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01004/opgs/edr/fcam/FRB_486615455EDR_F0481570FHAZ00323M_.JPG"].shuffle.last
-
-        # Set @mars_photo_url to use randomized default image
-        @mars_photo_url = @random_roover_default_img_src
-
-      else
-        # We have valid data :
-        # Set the img_src from @mars_rover_data block
-        @mars_photo_url = @mars_rover_data["photos"][0]["img_src"]
-      end
+    # define fallback images for nil response
+    if @mars_rover_data["photos"].nil?
+      @mars_rover = "Curiosity"
+      @mars_photo_url = ["http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01105/opgs/edr/fcam/FRB_495583818EDR_F0500000FHAZ00323M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00478/opgs/edr/ncam/NLB_439921111EDR_F0240366NCAM00399M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00786/opgs/edr/fcam/FLB_467267584EDR_F0440036FHAZ00323M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00867/opgs/edr/ncam/NLB_474458330EDR_F0450000NCAM00320M_.JPG", "http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044450000405085D01_DXXX.jpg", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01004/opgs/edr/fcam/FRB_486615455EDR_F0481570FHAZ00323M_.JPG"].shuffle.last
+    else
+      @mars_photo_url = @mars_rover_data["photos"][0]["img_src"]
+    end
   end
 
-
-
-  # Return weather data
-  # default values for index view = 90254 hermosa beach
-  def weathering(zip = 90254) # set default zip for index(hermosa beach area)
-    # render plain: zip  # need debugging?
-
-  # Convert Zipcode to latitude & longitude
+  def weathering(zip = 90254) # define latitude & longitude with zipcode
     @zip_to_latlong = HTTParty.get("http://api.zippopotam.us/us/#{zip}")
-      # Conditional check for nil and define default if found
-      # Invalid data would come from a non-valid zipcode submission
-      if @zip_to_latlong["places"].nil? #is @zip_to_latlong nil in value?
-        # We have invalid data from @zip_to_lat zipcode call
-        # Set defaults for latitude(lat) & longitude(lng)
-          # Corresponds to default zip 90254
-        @lat = "33.8643"
-        @lng = "-118.3955"
-        @area = "Hermosa Beach"
-
-      else
-        # Valid data :
-        # Set the latitude(lat) & longitude(lng) from @zip_to_lat block
-        @lat = @zip_to_latlong['places'][0]['latitude']
-        @lng = @zip_to_latlong['places'][0]['longitude']
-        @area = @zip_to_latlong['places'][0]['place name']
-      end
-
-  # Pull the weather data in regards to latitude & longitude specs
+    if @zip_to_latlong["places"].nil?
+      @lat = "33.8643"
+      @lng = "-118.3955"
+      @area = "Hermosa Beach"
+    else
+      @lat = @zip_to_latlong['places'][0]['latitude']
+      @lng = @zip_to_latlong['places'][0]['longitude']
+      @area = @zip_to_latlong['places'][0]['place name']
+    end
+      # Weather api request using latitude & longitude
     @weather = HTTParty.get("https://api.forecast.io/forecast/b6ec16c6daf2eaa642175d3a5d80d219/#{@lat},#{@lng}")
-
-    # TODO add fallbacks for api call failure
   end
-
 end
