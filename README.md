@@ -35,6 +35,5 @@ rails s
 * Set your [NASA](https://api.nasa.gov/#getting-started) api key with ENV['NASA_MOTD_API_KEY'] in MotdController
 * rails server -e production requires ENV SECRET_KEY_BASE to be set
 
-<hr>
 ___
 _TODO_ : push github's Zen of the day thru Yoda api
