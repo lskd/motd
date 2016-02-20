@@ -5,20 +5,20 @@
 * aka  _Message_ _of_ _the_ _Day_
 
 ___
-*MOTD*   app uses api endpoints to provide dynamic info.
+The *MOTD* app uses api endpoints to provide dynamic info.
 
-Weather info based on zipcode translation to Latitude & Longitude
+[Weather](https://api.forecast.io) info is based on [zipcode](http://api.zippopotam.us) translation to Latitude & Longitude
 
-Github's Zen of the day api
+Zen quote from Github's [Zen](https://api.github.com/zen) of the day api endpoint
 
-Random Abstract image api request
+Abstract image from [lorempixel's](lorempixel.com) api endpoint
 
-Nasa's Image of the day
+Nasa's [Astronomy picture of the day](http://apod.nasa.gov/apod/astropix.html) api [endpoint](https://api.nasa.gov/api.html#apod)
 
-Nasa's Rover images
+Nasa's [Rover images](https://api.nasa.gov/api.html#MarsPhotos)
 * randomly selects camera based on 4 cameras(navcam, mast, rhaz, fhaz) consistent across the 3 rovers  (Curiosity, Spirit, and Opportunity)
-* randomly selected Sol days on the yougest active rover, Curiosity @ 1120 sol days.
-* randomly selects from a collection static images on days no rover images are present
+* randomly selected Sol days on the youngest active rover, Curiosity @ 1120 sol days at time of writing.
+* fallback uses randomly selected image urls for nil api responses
 
 ___
 
