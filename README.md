@@ -29,6 +29,7 @@ git clone https://github.com/lskd/motd.git ./motd
 cd motd
 rake bundle
 rails s
+in firefox or chrome browser, goto localhost:3000
 ```
 
 * DEMO_KEY is used in MotdController for demo purposes. For extendted use, get your own api key from [NASA](https://api.nasa.gov/#getting-started)
