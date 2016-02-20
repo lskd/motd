@@ -27,7 +27,7 @@ ___
 ```
 git clone https://github.com/lskd/motd.git ./motd
 cd motd
-rake bundle
+rake bundle install
 rails s
 within a firefox or chrome browser, goto localhost:3000
 ```
